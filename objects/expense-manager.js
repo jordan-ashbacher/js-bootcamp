@@ -18,8 +18,8 @@ let resetAccount = function(account) {
 };
 
 let getAccountSummary = function(account) {
-	return `Account of ${account.name} has a balance of ${account.income -
-		account.expenses}. ${account.income} in income. ${account.expenses} in expenses.`;
+	return `Account of ${account.name} has a balance of $${account.income -
+		account.expenses}. $${account.income} in income. $${account.expenses} in expenses.`;
 };
 
 addIncome(myAccount, 1600);
