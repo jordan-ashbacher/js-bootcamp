@@ -41,7 +41,14 @@ const deleteTask = function(array, taskItem) {
 };
 
 deleteTask(tasks, 'have a mental breakdown');
-console.log(tasks);
+
+const getTasksTodo = function(array) {
+	return array.filter(function(task) {
+		return !task.completed;
+	});
+};
+
+console.log(getTasksTodo(tasks));
 
 // tasks.splice(2, 1);
 // tasks.push('Improve 3-point range');
