@@ -8,6 +8,9 @@ const tasks = [
 	'Take over the world'
 ];
 
+tasks.splice(2, 1);
+tasks.push('Improve 3-point range');
+tasks.shift();
+
 console.log(`You have ${tasks.length} todos on your list.`);
-console.log(`To-do: ${tasks[0]}`);
-console.log(`To-do: ${tasks[tasks.length - 2]}`);
+console.log(tasks);
