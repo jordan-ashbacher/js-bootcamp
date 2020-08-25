@@ -13,6 +13,11 @@ tasks.push('Improve 3-point range');
 tasks.shift();
 
 console.log(`You have ${tasks.length} todos on your list.`);
-tasks.forEach(function(task, index) {
-	console.log(`${index + 1}. ${task}`);
-});
+
+// tasks.forEach(function(task, index) {
+// 	console.log(`${index + 1}. ${task}`);
+// });
+
+for (i = 0; i < tasks.length; i++) {
+	console.log(`${i + 1}. ${tasks[i]}`);
+}
