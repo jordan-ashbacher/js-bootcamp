@@ -1,6 +1,17 @@
-const notes = [ 'Note 1', 'Note 2', 'Note 3' ];
-
-notes[2] = 'This is now the new note 3';
+const notes = [
+	{
+		title: 'My next trip',
+		body: 'I would like to travel to Portugal'
+	},
+	{
+		title: 'Habits to work on',
+		body: 'Cook more.'
+	},
+	{
+		title: 'Office modification',
+		body: 'Build a PC.'
+	}
+];
 
 // notes.forEach(function(note, index) {
 // 	console.log(`${index}: ${note}`);
@@ -9,3 +20,9 @@ notes[2] = 'This is now the new note 3';
 for (i = 0; i < notes.length; i++) {
 	console.log(`${i}: ${notes[i]}`);
 }
+
+const index = notes.findIndex(function(note, index) {
+	return note.title === 'Habits to work on';
+});
+
+console.log(index);
