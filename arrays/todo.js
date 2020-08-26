@@ -48,7 +48,22 @@ const getTasksTodo = function(array) {
 	});
 };
 
-console.log(getTasksTodo(tasks));
+const sortTasks = function(tasks) {
+	tasks.sort(function(a, b) {
+		if (!a.completed && b.completed) {
+			return -1;
+		} else if (!b.completed && a.completed) {
+			return 1;
+		} else {
+			return 0;
+		}
+	});
+};
+
+sortTasks(tasks);
+console.log(tasks);
+
+// console.log(getTasksTodo(tasks));
 
 // tasks.splice(2, 1);
 // tasks.push('Improve 3-point range');
