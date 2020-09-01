@@ -1,4 +1,4 @@
-const tasks = [
+const todos = [
 	{
 		text: 'Learn Javascript',
 		completed: false
@@ -33,26 +33,43 @@ const tasks = [
 	}
 ];
 
-// Initial uncompleted task count function
-// let uncompletedTaskCount = 0;
-// const countUncompletedTasks = tasks.forEach(function(task) {
-// 	if (task.completed === false) {
-// 		uncompletedTaskCount++;
-// 	}
-// });
+const filters = {
+	searchText: ''
+};
 
-const uncompletedTasks = tasks.filter(function(task) {
-	return !task.completed;
+const renderTasks = function(todos, filters) {
+	const filteredTodos = todos.filter(function(task) {
+		return task.text.toLowerCase().includes(filters.searchText.toLowerCase());
+	});
+
+	const incompleteTodos = filteredTodos.filter(function(todo) {
+		return !todo.completed;
+	});
+
+	document.querySelector('#todos').innerHTML = '';
+
+	const summaryEl = document.createElement('h2');
+	summaryEl.textContent = `You have ${incompleteTodos.length} to-dos remaining`;
+	document.querySelector('#todos').appendChild(summaryEl);
+
+	filteredTodos.forEach(function(task) {
+		const todoEl = document.createElement('p');
+		todoEl.textContent = task.text;
+		document.querySelector('#todos').appendChild(todoEl);
+	});
+};
+
+renderTasks(todos, filters);
+
+document.querySelector('#add-todo').addEventListener('click', function(e) {
+	console.log('New to do added to list');
 });
 
-console.log(uncompletedTasks);
+document.querySelector('#new-todo-text').addEventListener('input', function(e) {
+	console.log(e.target.value);
+});
 
-const uncompletedTaskSummary = document.createElement('h2');
-uncompletedTaskSummary.textContent = `You have ${uncompletedTasks.length} tasks left`;
-document.querySelector('body').appendChild(uncompletedTaskSummary);
-
-tasks.forEach(function(task) {
-	const item = document.createElement('p');
-	item.textContent = task.text;
-	document.querySelector('body').appendChild(item);
+document.querySelector('#search-todos').addEventListener('input', function(e) {
+	filters.searchText = e.target.value;
+	renderTasks(todos, filters);
 });
