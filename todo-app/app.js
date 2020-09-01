@@ -47,12 +47,12 @@ const uncompletedTasks = tasks.filter(function(task) {
 
 console.log(uncompletedTasks);
 
-const uncompletedTaskSummary = document.createElement('p');
+const uncompletedTaskSummary = document.createElement('h2');
 uncompletedTaskSummary.textContent = `You have ${uncompletedTasks.length} tasks left`;
 document.querySelector('body').appendChild(uncompletedTaskSummary);
 
 tasks.forEach(function(task) {
-	let item = document.createElement('p');
+	const item = document.createElement('p');
 	item.textContent = task.text;
 	document.querySelector('body').appendChild(item);
 });
