@@ -7,11 +7,12 @@
 </head>
 <body>
     <h1>To Do</h1>
-    <input id="new-todo-text" type="text" placeholder="Enter new to-do">
-    <button id='add-todo'>Add Task</button>
-    <br>
     <input type="text" id="search-todos" placeholder="Search to-dos" style="margin-top: 1rem;;">
     <div id="todos"></div>
+    <form id="create-todo">
+        <input type="text" name="todoText" placeholder="Enter new to-do">
+        <button type="submit">Add to list</button>
+    </form>
 
     <script src="app.js"></script>
 </body>
