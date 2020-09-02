@@ -1,50 +1,21 @@
-const todos = [
-	{
-		text: 'Learn Javascript',
-		completed: false
-	},
-	{
-		text: 'Practice yoga',
-		completed: true
-	},
-	{
-		text: 'Improve 3-point percentage',
-		completed: true
-	},
-	{
-		text: 'Fall in love again',
-		completed: false
-	},
-	{
-		text: 'Compete in a half-marathon',
-		completed: false
-	},
-	{
-		text: 'Build a website',
-		completed: true
-	},
-	{
-		text: 'Take over the world',
-		completed: false
-	},
-	{
-		text: 'Have a mental breakdown',
-		completed: true
-	}
-];
+let todos = [];
 
 const filters = {
 	searchText: '',
 	hideCompleted: false
 };
 
+const todosJSON = localStorage.getItem('todos');
+
+if (todosJSON !== null) {
+	todos = JSON.parse(todosJSON);
+}
+
 const renderTodos = function(todos, filters) {
-	const filteredTodos = todos.filter(function(todo) {
-		if (filters.hideCompleted == true) {
-			return todo.text.toLowerCase().includes(filters.searchText.toLowerCase()) && !todo.completed;
-		} else {
-			return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
-		}
+	let filteredTodos = todos.filter(function(todo) {
+		const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
+		const hideCompletedMatch = !filters.hideCompleted || !todo.completed;
+		return searchTextMatch && hideCompletedMatch;
 	});
 
 	const incompleteTodos = filteredTodos.filter(function(todo) {
@@ -77,7 +48,9 @@ document.querySelector('#create-todo').addEventListener('submit', function(e) {
 		text: e.target.elements.todoText.value,
 		completed: false
 	});
+	localStorage.setItem('todos', JSON.stringify(todos));
 	renderTodos(todos, filters);
+
 	e.target.elements.todoText.value = '';
 });
 
