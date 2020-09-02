@@ -14,20 +14,6 @@ const saveTodo = function(todo) {
 	localStorage.setItem('todos', JSON.stringify(todos));
 };
 
-// Generate the remaining to-do summary
-const generateSummaryDOM = function(todos) {
-	const summaryEl = document.createElement('h2');
-	summaryEl.textContent = `You have ${todos.length} to-dos remaining`;
-	return summaryEl;
-};
-
-// Generate DOM element for each to-do
-const generateTodoDOM = function(todo) {
-	const todoEl = document.createElement('p');
-	todoEl.textContent = todo.text;
-	return todoEl;
-};
-
 // Render application to-do list with filters
 const renderTodos = function(todos, filters) {
 	let filteredTodos = todos.filter(function(todo) {
@@ -42,11 +28,38 @@ const renderTodos = function(todos, filters) {
 
 	document.querySelector('#todos').innerHTML = '';
 
-	const summaryEl = generateSummaryDOM(incompleteTodos);
-	document.querySelector('#todos').appendChild(summaryEl);
+	document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos));
 
 	filteredTodos.forEach(function(todo) {
-		todoEl = generateTodoDOM(todo);
-		document.querySelector('#todos').appendChild(todoEl);
+		document.querySelector('#todos').appendChild(generateTodoDOM(todo));
 	});
+};
+
+// Generate DOM element for each to-do
+const generateTodoDOM = function(todo) {
+	const todoEl = document.createElement('div');
+	const checkEl = document.createElement('input');
+	const textEl = document.createElement('span');
+	const deleteEl = document.createElement('button');
+
+	// Setup to-do checkbox
+	checkEl.setAttribute('type', 'checkbox');
+	todoEl.appendChild(checkEl);
+
+	// Setup to-do text
+	textEl.textContent = todo.text;
+	todoEl.appendChild(textEl);
+
+	// Setup delete button
+	deleteEl.textContent = 'x';
+	todoEl.appendChild(deleteEl);
+
+	return todoEl;
+};
+
+// Generate the remaining to-do summary
+const generateSummaryDOM = function(todos) {
+	const summaryEl = document.createElement('h2');
+	summaryEl.textContent = `You have ${todos.length} to-dos remaining`;
+	return summaryEl;
 };
