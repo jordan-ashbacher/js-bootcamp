@@ -14,11 +14,20 @@ const saveTodo = function(todo) {
 	localStorage.setItem('todos', JSON.stringify(todos));
 };
 
-// Remove a to-do from list by ID
+// Toggle completed value of to-do
+const toggleTodo = function(id) {
+	const todoIndex = todos.findIndex(function(todo) {
+		return todo.id === id;
+	});
+	if (todoIndex > -1) {
+		todos[todoIndex].completed = !todos[todoIndex].completed;
+	}
+};
 
+// Remove a to-do from list by ID
 const removeTodo = function(id) {
 	const todoIndex = todos.findIndex(function(todo) {
-		return id === todos.id;
+		return todo.id === id;
 	});
 	if (todoIndex > -1) {
 		todos.splice(todoIndex, 1);
@@ -55,6 +64,12 @@ const generateTodoDOM = function(todo) {
 
 	// Setup to-do checkbox
 	checkEl.setAttribute('type', 'checkbox');
+	checkEl.checked = todo.completed;
+	checkEl.addEventListener('change', function(e) {
+		toggleTodo(todo.id);
+		saveTodo(todos);
+		renderTodos(todos, filters);
+	});
 	todoEl.appendChild(checkEl);
 
 	// Setup to-do text
@@ -65,8 +80,8 @@ const generateTodoDOM = function(todo) {
 	deleteEl.textContent = 'x';
 	todoEl.appendChild(deleteEl);
 	deleteEl.addEventListener('click', function(e) {
-		removeTodo(todos.id);
-		saveTodo(todo);
+		removeTodo(todo.id);
+		saveTodo(todos);
 		renderTodos(todos, filters);
 	});
 
