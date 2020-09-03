@@ -14,6 +14,17 @@ const saveTodo = function(todo) {
 	localStorage.setItem('todos', JSON.stringify(todos));
 };
 
+// Remove a to-do from list by ID
+
+const removeTodo = function(id) {
+	const todoIndex = todos.findIndex(function(todo) {
+		return id === todos.id;
+	});
+	if (todoIndex > -1) {
+		todos.splice(todoIndex, 1);
+	}
+};
+
 // Render application to-do list with filters
 const renderTodos = function(todos, filters) {
 	let filteredTodos = todos.filter(function(todo) {
@@ -53,6 +64,11 @@ const generateTodoDOM = function(todo) {
 	// Setup delete button
 	deleteEl.textContent = 'x';
 	todoEl.appendChild(deleteEl);
+	deleteEl.addEventListener('click', function(e) {
+		removeTodo(todos.id);
+		saveTodo(todo);
+		renderTodos(todos, filters);
+	});
 
 	return todoEl;
 };
