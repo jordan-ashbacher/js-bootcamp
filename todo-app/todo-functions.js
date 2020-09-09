@@ -16,11 +16,11 @@ const saveTodo = function(todo) {
 
 // Toggle completed value of to-do
 const toggleTodo = function(id) {
-	const todoIndex = todos.findIndex(function(todo) {
+	const todo = todos.find(function(todo) {
 		return todo.id === id;
 	});
-	if (todoIndex > -1) {
-		todos[todoIndex].completed = !todos[todoIndex].completed;
+	if (todo !== undefined) {
+		todo.completed = !todos.completed;
 	}
 };
 
