@@ -1,62 +1,52 @@
 // Get to-dos from local storage
-const getSavedTodos = function() {
+const getSavedTodos = () => {
 	const todosJSON = localStorage.getItem('todos');
 
-	if (todosJSON !== null) {
-		return JSON.parse(todosJSON);
-	} else {
-		return [];
-	}
+	return todosJSON !== null ? JSON.parse(todosJSON) : [];
 };
 
 // Save to-do to local storage
-const saveTodo = function(todo) {
+const saveTodo = (todo) => {
 	localStorage.setItem('todos', JSON.stringify(todos));
 };
 
 // Toggle completed value of to-do
-const toggleTodo = function(id) {
-	const todo = todos.find(function(todo) {
-		return todo.id === id;
-	});
+const toggleTodo = (id) => {
+	const todo = todos.find((todo) => todo.id === id);
 	if (todo !== undefined) {
 		todo.completed = !todos.completed;
 	}
 };
 
 // Remove a to-do from list by ID
-const removeTodo = function(id) {
-	const todoIndex = todos.findIndex(function(todo) {
-		return todo.id === id;
-	});
+const removeTodo = (id) => {
+	const todoIndex = todos.findIndex((todo) => todo.id === id);
 	if (todoIndex > -1) {
 		todos.splice(todoIndex, 1);
 	}
 };
 
 // Render application to-do list with filters
-const renderTodos = function(todos, filters) {
-	let filteredTodos = todos.filter(function(todo) {
+const renderTodos = (todos, filters) => {
+	let filteredTodos = todos.filter((todo) => {
 		const searchTextMatch = todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
 		const hideCompletedMatch = !filters.hideCompleted || !todo.completed;
 		return searchTextMatch && hideCompletedMatch;
 	});
 
-	const incompleteTodos = filteredTodos.filter(function(todo) {
-		return !todo.completed;
-	});
+	const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
 
 	document.querySelector('#todos').innerHTML = '';
 
 	document.querySelector('#todos').appendChild(generateSummaryDOM(incompleteTodos));
 
-	filteredTodos.forEach(function(todo) {
+	filteredTodos.forEach((todo) => {
 		document.querySelector('#todos').appendChild(generateTodoDOM(todo));
 	});
 };
 
 // Generate DOM element for each to-do
-const generateTodoDOM = function(todo) {
+const generateTodoDOM = (todo) => {
 	const todoEl = document.createElement('div');
 	const checkEl = document.createElement('input');
 	const textEl = document.createElement('span');
@@ -65,7 +55,7 @@ const generateTodoDOM = function(todo) {
 	// Setup to-do checkbox
 	checkEl.setAttribute('type', 'checkbox');
 	checkEl.checked = todo.completed;
-	checkEl.addEventListener('change', function(e) {
+	checkEl.addEventListener('change', (e) => {
 		toggleTodo(todo.id);
 		saveTodo(todos);
 		renderTodos(todos, filters);
@@ -79,7 +69,7 @@ const generateTodoDOM = function(todo) {
 	// Setup delete button
 	deleteEl.textContent = 'x';
 	todoEl.appendChild(deleteEl);
-	deleteEl.addEventListener('click', function(e) {
+	deleteEl.addEventListener('click', (e) => {
 		removeTodo(todo.id);
 		saveTodo(todos);
 		renderTodos(todos, filters);
@@ -89,7 +79,7 @@ const generateTodoDOM = function(todo) {
 };
 
 // Generate the remaining to-do summary
-const generateSummaryDOM = function(todos) {
+const generateSummaryDOM = (todos) => {
 	const summaryEl = document.createElement('h2');
 	summaryEl.textContent = `You have ${todos.length} to-dos remaining`;
 	return summaryEl;
