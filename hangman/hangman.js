@@ -2,6 +2,7 @@ const Hangman = function(word, remainingGuesses) {
 	this.word = word.toLowerCase().split('');
 	this.remainingGuesses = remainingGuesses;
 	this.guessedLetters = [];
+	this.status = 'playing';
 };
 
 Hangman.prototype.getPuzzle = function() {
@@ -28,17 +29,38 @@ Hangman.prototype.makeGuess = function(guess) {
 	if (isUnique && !this.word.includes(guess)) {
 		this.remainingGuesses--;
 	}
+
+	this.getStatus();
 };
 
-const game1 = new Hangman('Cat', 2);
-const game2 = new Hangman('New Jersey', 4);
+Hangman.prototype.getStatus = function() {
+	// EVERY SOLUTION
+	const finished = this.word.every((letter) => {
+		return this.guessedLetters.includes(letter);
+	});
 
-console.log(game1.getPuzzle());
-console.log(game1.remainingGuesses);
+	// FILTER SOLUTION
+	// const lettersUnguessed = this.word.filter((letter) => {
+	// 	return !this.guessedLetters.includes(letter)
+	// })
 
-window.addEventListener('keypress', function(e) {
-	const guess = e.key;
-	game1.makeGuess(guess);
-	console.log(game1.getPuzzle());
-	console.log(game1.remainingGuesses);
-});
+	// const finished = lettersUnguessed.length === 0
+
+	// FOR EACH LOOP SOLUTION
+	// let finished = true;
+
+	// this.word.forEach((letter) => {
+	// 	if (this.guessedLetters.includes(letter)) {
+	// 	} else {
+	// 		finished = false;
+	// 	}
+	// });
+
+	if (this.remainingGuesses === 0) {
+		this.status = 'failed';
+	} else if (finished) {
+		this.status = 'finished';
+	} else {
+		this.status = 'playing';
+	}
+};
