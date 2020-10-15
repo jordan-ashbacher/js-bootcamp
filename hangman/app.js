@@ -1,6 +1,6 @@
 const game1 = new Hangman('Cat', 2);
-document.querySelector('#puzzle').textContent = game1.getPuzzle();
-document.querySelector('#message').textContent = game1.getMessage();
+document.querySelector('#puzzle').textContent = game1.puzzle;
+document.querySelector('#message').textContent = game1.statusMessage;
 
 window.addEventListener('keypress', function(e) {
 	const guess = e.key;
@@ -9,6 +9,6 @@ window.addEventListener('keypress', function(e) {
 });
 
 const generateGameDOM = function() {
-	document.querySelector('#puzzle').textContent = game1.getPuzzle();
-	document.querySelector('#message').textContent = game1.getMessage();
+	document.querySelector('#puzzle').textContent = game1.puzzle;
+	document.querySelector('#message').textContent = game1.statusMessage;
 };

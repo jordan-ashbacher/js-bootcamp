@@ -5,7 +5,7 @@ class Hangman {
 		this.guessedLetters = [];
 		this.status = 'playing';
 	}
-	getPuzzle() {
+	get puzzle() {
 		let puzzle = '';
 		this.word.forEach((letter) => {
 			if (this.guessedLetters.includes(letter) || letter === ' ') {
@@ -34,7 +34,7 @@ class Hangman {
 	getStatus() {
 		// EVERY SOLUTION
 		const finished = this.word.every((letter) => {
-			return this.guessedLetters.includes(letter);
+			return this.guessedLetters.includes(letter) || letter === ' ';
 		});
 
 		// FILTER SOLUTION
@@ -62,7 +62,7 @@ class Hangman {
 			this.status = 'playing';
 		}
 	}
-	getMessage() {
+	get statusMessage() {
 		if (this.status === 'failed') {
 			return `Nice try! The word was "${this.word.join('')}".`;
 		} else if (this.status === 'finished') {
