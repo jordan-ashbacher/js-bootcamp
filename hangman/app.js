@@ -16,18 +16,20 @@ const generateGameDOM = function() {
 	document.querySelector('#message').textContent = game1.statusMessage;
 };
 
-getPuzzle((error, puzzle) => {
-	if (error) {
-		console.log(`Error: ${error}`);
-	} else {
+getPuzzle('2').then(
+	(puzzle) => {
 		console.log(puzzle);
+	},
+	(err) => {
+		console.log(`Error: ${err}`);
 	}
-});
+);
 
-getCountry('US', (error, country) => {
-	if (error) {
-		console.log(error);
-	} else {
-		console.log(`${country.name}`);
+getCountry('MX').then(
+	(country) => {
+		console.log(country.name);
+	},
+	(err) => {
+		console.log(`Error: ${err}`);
 	}
-});
+);
