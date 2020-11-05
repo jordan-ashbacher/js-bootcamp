@@ -29,6 +29,12 @@ getCountry('NZ').then((country) => {
 	console.log(`Error: ${err}`)
 })
 
+getLocation().then((location) => {
+	console.log(`You are currently in ${location.city}, ${location.region}, ${location.country}.`)
+}).catch((err) => {
+	console.log(`Error: ${err}`)
+})
+
 // getCountry('MX').then(
 // 	(country) => {
 // 		console.log(country.name);

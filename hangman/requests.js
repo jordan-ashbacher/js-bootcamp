@@ -22,6 +22,18 @@ const getCountry = (countryCode) => {
 	})
 }
 
+const getLocation = () => {
+	return fetch('https://ipinfo.io/json?token=db382f08dbc601').then((response) => {
+		if (response.status === 200) {
+			return response.json()
+		} else {
+			throw new Error('Unable to fetch IP data')
+		}
+	}).then((data) => {
+		return data
+	})
+}
+
 
 // const getCountry = (countryCode) =>
 // 	new Promise((resolve, reject) => {
