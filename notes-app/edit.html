@@ -3,17 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
     <title>Notes</title>
 </head>
 <body>
-    <a href="/index.html">Home</a>
+    <header class="header">
+        <div class="container">
+            <div class="header_title">
+                <h1>Notes</h1>
+            </div>
+            <div class="header_subtitle">
+                <h2>Take notes and never forget</h2>
+            </div>
+        </div>
+    </header>
+    <div class="actions">
+        <div class="actions_container actions_container--spaced">
+            <a href="/index.html">Home</a>
+            <span id="last-edited"></span>
+        </div>
+    </div>
+    
     <input type="text" id="note-title" placeholder="Note Title">
-    <span id="last-edited"></span>
+    
     <textarea id="note-body" placeholder="Enter note text" cols="30" rows="10"></textarea>
     <button id="remove-note">Remove Note</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
-    <script src="note-functions.js"></script>
-    <script src="note-edit.js"></script>
+    <script src="scripts/note-functions.js"></script>
+    <script src="scripts/note-edit.js"></script>
 </body>
 </html>

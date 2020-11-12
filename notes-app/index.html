@@ -3,23 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
     <title>Notes</title>
 </head>
 <body>
-    <h1>Notes</h1>
-    <h2>Take notes and never forget</h2>
-    <input id="search-text" type="text" placeholder="Filter notes">
-    <select name="" id="filter-by">
-        <option value="byEdited">Sort by last edited</option>
-        <option value="byCreated">Sort by recently created</option>
-        <option value="alphabetical">Sort alphabetically</option>
-    </select>
+    <header class="header">
+        <div class="container">
+            <div class="header_title">
+                <h1>Notes</h1>
+            </div>
+            <div class="header_subtitle">
+                <h2>Take notes and never forget</h2>
+            </div>
+        </div>
+    </header>
+    <div class="actions">
+        <div class="actions_container">
+            <input id="search-text" type="text" placeholder="Filter notes" class="input">
+            <select name="" id="filter-by" class="dropdown">
+                <option value="byEdited">Sort by last edited</option>
+                <option value="byCreated">Sort by recently created</option>
+                <option value="alphabetical">Sort alphabetically</option>
+            </select>
+        </div>
+    </div>
     <div id="notes"></div>
     <button id='create-note'>Create Note</button>
 
     <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
-    <script src="note-functions.js"></script>
-    <script src="note-app.js"></script>
+    <script src="scripts/note-functions.js"></script>
+    <script src="scripts/note-app.js"></script>
 </body>
 </html>
